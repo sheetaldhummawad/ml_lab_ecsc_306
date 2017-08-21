@@ -1,0 +1,23 @@
+import tensorflow as tf
+x=tf.constant(5,name="x")
+y=tf.constant(4,name="y")
+with tf.name_scope("MyOperationGroup"):
+    with tf.name_scope("LHS"):
+         a=tf.subtract(x,y)
+             c=tf.multiply(a,a)
+
+    with tf.name_scope("x_square"):
+         d=tf.multiply(x,x)
+    with tf.name_scope("y_square"):
+         e=tf.multiply(y,y)
+    with tf.name_scope("two_x_y"):    
+         f=tf.multiply(x,y)
+            g=tf.multiply(2,f)
+            h=tf.add(d,e)
+          i=tf.subtract(h,g)
+with tf.Session( ) as sess:
+    writer=tf.summary.FileWriter("/tmp/tboard/output4",sess.graph)
+    print(sess.run(c))
+    print(sess.run(i))
+    writer.close( )
+

@@ -1,0 +1,27 @@
+import tensorflow as tf
+x=tf.constant(5,name="x")
+y=tf.constant(4,name="y")
+with tf.name_scope("CubicEquation"):
+    with tf.name_scope("Scope_A"):
+        a=tf.add(x,y,name="Add_the_numbers")
+        b=tf.multiply(a,a,name="Multiply_the_numbers")
+        c=tf.multiply(b,a,name="Multiply_again_to_get_cube")
+    with tf.name_scope("Scope_B"):
+        d=tf.multiply(x,x,name="Multiply_the_number")
+        e=tf.multiply(x,d,name="Multiply_again_to_get_cube")
+    with tf.name_scope("Scope_C"):
+        f=tf.multiply(y,y,name="Multiply_the_number")
+        g=tf.multiply(y,f,name="Multiply_again_to_get_cube")
+    with tf.name_scope("Scope_D"):
+        h=tf.add(x,y,name="Add_numbers")
+        i=tf.multiply(x,y,name="Multiply_numbers")
+        j=tf.multiply(h,i)
+        k=tf.multiply(3,j)
+    with tf.name_scope("Scope_E"):
+        l=tf.add(e,g,name="Final_add_RHS")
+        m=tf.add(l,k,name="Final_add_RHS")
+    with tf.Session( ) as sess:
+        writer=tf.summary.FileWriter("/tmp/tboard/output10",sess.graph)
+        print(sess.run(c))
+        print(sess.run(m))
+        writer.close( )
